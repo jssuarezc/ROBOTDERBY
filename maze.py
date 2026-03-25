@@ -73,8 +73,6 @@ class Maze:
         self.grid = np.ones((self.height, self.width), dtype=int)
         self._generate()
 
-## Double checking if it produces different maze before moving with the next step:
-
 if __name__ == "__main__":
     m = Maze()
 
@@ -93,4 +91,4 @@ if __name__ == "__main__":
     first_grid = m.grid.copy()
     m.reset()
     assert not np.array_equal(first_grid, m.grid), "Reset should give a new maze"
-    print("Reset produces a different maze")
+    print("Reset for a different maze")

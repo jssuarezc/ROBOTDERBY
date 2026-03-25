@@ -16,8 +16,23 @@ and categorize them based on efficiency.
 3. Follow the env file example to create the variables to be used
 
 
-## Functions
+## Race participants
 
+
+
+**Kweebie:**
+- Learns from each (state,value) pair
+- Improves over time and repetitions
+- Sensitive to epsilon(exploration), alpha(learning rate) and gamma(penalty)
+
+**Randy:**
+- Always fast to reach the goal
+- Ignores path structure
+- While initially fast, it gets stuck in loops quite often
+
+**John:**
+- "Wanderer"
+- Slightly biased towards new obstacles
 
 ## TO DO NEXT
 1. Work on the API endpoints

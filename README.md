@@ -18,7 +18,7 @@ and categorize them based on efficiency.
 
 ## Race participants
 
-![Web Application Interface](/RoboDerbyParticipants.pngs)
+![Derby Racers](RoboDerbyParticipants.pngs)
 
 **Kweebie:**
 - Learns from each (state,value) pair

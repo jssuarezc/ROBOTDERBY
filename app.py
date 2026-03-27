@@ -26,7 +26,7 @@ class GameState:
     def to_dict(self):
         return {
             "maze": self.maze.to_dict(),
-            "participants": [a.to_dict() for a in self.agents],
+            "agents": [a.to_dict() for a in self.agents],
             "done": all(a.done for a in self.agents),
         }
     

@@ -1,0 +1,113 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #0f0f12;
+    color: #e0dff8;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    color: #afa9ec;
+}
+
+#layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 860px;
+}
+
+#canvas {
+    border-radius: 8px;
+    image-rendering: pixelated;
+    flex-shrink: 0;
+}
+
+#sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.agent-card {
+    background: #1a1a22;
+    border-radius: 8px;
+    padding: 12px 14px;
+    border: 1px solid #2a2840;
+}
+
+.agent-name {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.agent-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 3px;
+}
+
+.agent-row span:last-child { color: #e0dff8; }
+
+.badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+#controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+button {
+    background: #2a2840;
+    color: #afa9ec;
+    border: 1px solid #534AB7;
+    border-radius: 6px;
+    padding: 6px 16px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: monospace;
+}
+
+button:hover { background: #3a3860; }
+
+#btn-run {
+    background: #0f1f18;
+    color: #5DCAA5;
+    border-color: #1D9E75;
+}
+
+#btn-run:hover { background: #1a2f28; }
+
+.speed-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.speed-row input {
+    flex: 1;
+    accent-color: #7F77DD;
+}

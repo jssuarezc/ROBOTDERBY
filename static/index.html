@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Robot Derby</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>ROBOT DERBY</h1>
+  <div id="layout">
+    <canvas id="canvas"></canvas>
+    <div id="sidebar">
+      <div id="agent-cards"></div>
+      <div id="controls">
+        <button id="btn-run">Run</button>
+        <button id="btn-reset">New maze</button>
+      </div>
+
+      <div class="speed-row">
+        <span>Speed</span>
+        <input type="range" id="speed"
+               min="1" max="10" value="4">
+        <span id="speed-label">4×</span>
+      </div>
+    </div>
+  </div>
+  <script src="/static/script.js"></script> 
+</body>

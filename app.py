@@ -1,3 +1,6 @@
+import os
+import joblib
+import numpy as np
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -8,27 +11,54 @@ from participants import RacerX, RacerQ, RacerG
 
 class GameState:
     def __init__(self):
+        self.svm = joblib.load(os.getenv("MODEL_PATH"))
+        self.tick_count = 0
         self.new_game()
 
     def new_game(self):
         self.maze = Maze()
+
+        old_q = {a.name: a.q_table for a in self.agents 
+                 if hasattr(a, 'q_table')} if hasattr(self, 'agents') else {}
+
         self.agents = [
             RacerQ(self.maze),
             RacerG(self.maze),
             RacerX(self.maze),
         ]
 
+        for agent in self.agents:
+            if hasattr(agent, 'q_table') and agent.name in old_q:
+                agent.q_table = old_q[agent.name]
+
     def step_all(self):
         for agent in self.agents:
             agent.step()
+        self.tick_count += 1
+        if self.tick_count % 100 == 0:
+            self._adjust_difficulty()
         return all(a.done for a in self.agents)
-    
+        
     def to_dict(self):
         return {
             "maze": self.maze.to_dict(),
             "agents": [a.to_dict() for a in self.agents],
             "done": all(a.done for a in self.agents),
         }
+    
+    def _adjust_difficulty(self):
+        for agent in self.agents:
+            if agent.done:
+                continue
+            features = np.array([agent.get_features()])
+            state_label = self.svm.predict(features)[0]
+            agent.last_state = {0: "efficient", 1: "stuck", 2: "exploring"}[state_label]
+
+            if hasattr(agent, 'epsilon'):
+                if state_label == 1:
+                    agent.epsilon = min(agent.epsilon + 0.15, 0.9)
+                elif state_label == 2:
+                    agent.epsilon = max(agent.epsilon - 0.05, 0.1)
     
 game = GameState()
 

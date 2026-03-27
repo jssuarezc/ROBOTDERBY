@@ -1,5 +1,7 @@
 # ROBOT DERBY
 
+![Derby Image](robotderby.png)
+
 This project idea uses an old repo that navigates a robot through a maze using Q-algorithm to find a way out. In this case, 
 3 agents or "participants# will be using different learning strategies to find a way out of this maze. Within each iteration, 
 the maze changes. This system aims to conneck this backend file into a Web Frontend using Javascript to make it interactive, 

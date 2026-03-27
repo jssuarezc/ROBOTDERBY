@@ -50,10 +50,17 @@ function render(data) {
 
 function updateCards(agents) {
   const container = document.getElementById('agent-cards')
+  const stateColors = {
+    efficient: { bg: '#0a1f18', color: '#5DCAA5' },
+    stuck:     { bg: '#2a1a10', color: '#f0997b' },
+    exploring: { bg: '#1a1228', color: '#afa9ec' },
+  }
+
   container.innerHTML = agents.map(a => {
+    const sc     = stateColors[a.last_state] || stateColors.exploring
     const status = a.done
       ? `<span class="badge" style="background:#0a1f18;color:#5DCAA5">done</span>`
-      : `<span class="badge" style="background:#1a1a22;color:#888">racing</span>`
+      : `<span class="badge" style="background:${sc.bg};color:${sc.color}">${a.last_state ?? 'exploring'}</span>`
     return `
       <div class="agent-card">
         <div class="agent-name" style="color:${a.color}">${a.name}</div>

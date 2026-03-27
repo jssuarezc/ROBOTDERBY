@@ -11,6 +11,9 @@ class Participants:
         self.position = list(maze.start)
         self.steps = 0
         self.wins = 0
+        self._episode_reward = 0
+        self.last_state = "exploring"
+        self._visited = set()
         self.done = False
 
     def choose_actions(self):
@@ -31,6 +34,9 @@ class Participants:
         self.steps += 1
         reward = self._reward()
 
+        self._episode_reward += reward
+        self._visited.add(tuple(self.position))
+
         if self.position == list(self.maze.goal):
             self.done = True
             self.wins += 1
@@ -49,6 +55,17 @@ class Participants:
         self.steps = 0
         self.done = False
 
+    def get_features(self):
+        gr, gc = self.maze.goal
+        pr, pc = self.position
+        dist = abs(pr - gr) + abs(pc - gc)
+        return [
+            self.steps,
+            self._episode_reward,
+            len(self._visited),
+            dist,
+        ]
+
     def to_dict(self):
 
         return {
@@ -58,6 +75,7 @@ class Participants:
             "steps": self.steps,
             "wins": self.wins,
             "done": self.done,
+            "last_state": self.last_state,
         }
     
 class RacerQ(Participants):
@@ -112,6 +130,8 @@ class RacerQ(Participants):
         return reward
 
     def reset(self):
+        self._episode_reward = 0
+        self._visited = set()
         super().reset()
 
 class RacerG(Participants):

@@ -11,7 +11,8 @@ from participants import RacerX, RacerQ, RacerG
 
 class GameState:
     def __init__(self):
-        self.svm = joblib.load(os.getenv("MODEL_PATH"))
+        model_path = os.getenv("MODEL_PATH")
+        self.svm = joblib.load(model_path) if model_path else None
         self.tick_count = 0
         self.new_game()
 
@@ -47,6 +48,8 @@ class GameState:
         }
     
     def _adjust_difficulty(self):
+        if self.svm is None:
+            return
         for agent in self.agents:
             if agent.done:
                 continue

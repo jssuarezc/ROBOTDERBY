@@ -5,4 +5,3 @@ bin/
 lib/
 __pycache__/
 *.pyc
-models/

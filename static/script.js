@@ -1,4 +1,4 @@
-const API    = 'http://localhost:8000'
+const API    = ''
 const CELL   = 20
 const COLORS = {
   wall:  '#2a2840',
